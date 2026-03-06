@@ -35,8 +35,21 @@ export default function SubjectsList() {
 
   const searchFilters = searchQuery
     ? [
-        { field: "name", operator: "contains" as const, value: searchQuery },
-        { field: "code", operator: "contains" as const, value: searchQuery },
+        {
+          operator: "or" as const,
+          value: [
+            {
+              field: "name",
+              operator: "contains" as const,
+              value: searchQuery,
+            },
+            {
+              field: "code",
+              operator: "contains" as const,
+              value: searchQuery,
+            },
+          ],
+        },
       ]
     : [];
 
@@ -131,7 +144,7 @@ export default function SubjectsList() {
               </SelectContent>
             </Select>
 
-            <CreateButton resource="subjects" />
+            <CreateButton />
           </div>
         </div>
       </div>
